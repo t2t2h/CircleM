@@ -1,0 +1,30 @@
+name: Build dylib
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tools
+        run: brew install ldid dpkg make
+
+      - name: Install Theos
+        run: |
+          git clone --recursive https://github.com/theos/theos.git "$HOME/theos"
+          echo "THEOS=$HOME/theos" >> $GITHUB_ENV
+
+      - name: Build
+        run: gmake package FINALPACKAGE=1
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: CircleMenu
+          path: |
+            .theos/obj/*.dylib
+            packages/*.deb
