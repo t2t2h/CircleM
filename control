@@ -1,0 +1,9 @@
+Package: com.example.circlemenu
+Name: CircleMenu
+Version: 1.0.0
+Architecture: iphoneos-arm
+Description: Floating radial menu: network HUD + voice speed
+Maintainer: you
+Author: you
+Section: Tweaks
+Depends: mobilesubstrate
